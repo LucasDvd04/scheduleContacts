@@ -40,8 +40,10 @@ public class ContactsPhone extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
+        jBHome = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setLocation(new java.awt.Point(0, 0));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -53,14 +55,14 @@ public class ContactsPhone extends javax.swing.JFrame {
 
             },
             new String [] {
-                "IdPhone", "DDD", "Number"
+                "IdPhone", "DDD", "Number", ""
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, true, true
+                false, true, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -69,6 +71,11 @@ public class ContactsPhone extends javax.swing.JFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(jTable1);
@@ -76,6 +83,9 @@ public class ContactsPhone extends javax.swing.JFrame {
             jTable1.getColumnModel().getColumn(0).setMinWidth(0);
             jTable1.getColumnModel().getColumn(0).setPreferredWidth(0);
             jTable1.getColumnModel().getColumn(0).setMaxWidth(0);
+            jTable1.getColumnModel().getColumn(3).setMinWidth(40);
+            jTable1.getColumnModel().getColumn(3).setPreferredWidth(40);
+            jTable1.getColumnModel().getColumn(3).setMaxWidth(40);
         }
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
@@ -83,14 +93,14 @@ public class ContactsPhone extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Id", "Name", "E-Mail"
+                "Id", "Name", "E-Mail", ""
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, true, true
+                false, true, true, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -101,12 +111,27 @@ public class ContactsPhone extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable2MouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTable2);
         if (jTable2.getColumnModel().getColumnCount() > 0) {
             jTable2.getColumnModel().getColumn(0).setMinWidth(0);
             jTable2.getColumnModel().getColumn(0).setPreferredWidth(0);
             jTable2.getColumnModel().getColumn(0).setMaxWidth(0);
+            jTable2.getColumnModel().getColumn(3).setMinWidth(40);
+            jTable2.getColumnModel().getColumn(3).setPreferredWidth(40);
+            jTable2.getColumnModel().getColumn(3).setMaxWidth(40);
         }
+
+        jBHome.setText("Home");
+        jBHome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBHomeActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -114,40 +139,48 @@ public class ContactsPhone extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(111, 111, 111)
+                        .addComponent(jBHome)
+                        .addGap(0, 128, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(13, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jBHome)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
+
+        getAccessibleContext().setAccessibleDescription("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-       phones = dao.ReadPhones(this.idRef);
-       DefaultTableModel phon = (DefaultTableModel)jTable1.getModel();
-       phon.setNumRows(0);
-       for(int i = 0; i < phones.size();i++){
-          phon.addRow(new Object[]{
-              phones.get(i).getId(),phones.get(i).getDdd(),phones.get(i).getTelefone()
-          });
-       } 
-       
-        DefaultTableModel person = (DefaultTableModel)jTable2.getModel();
-       person.setNumRows(0);
-        person.addRow(new Object[]{
-         c.getId(),c.getNome(),c.getEmail()
-          });
+       MakeListPhone();
     }//GEN-LAST:event_formWindowOpened
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+       GetPositionPhone();      
+       MakeListPhone();
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
+        GetPositionContact();
+        Home();
+    }//GEN-LAST:event_jTable2MouseClicked
+
+    private void jBHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBHomeActionPerformed
+        Home();
+    }//GEN-LAST:event_jBHomeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -183,8 +216,51 @@ public class ContactsPhone extends javax.swing.JFrame {
             }
         });
     }
+    
+    void GetPositionPhone(){
+        int column = jTable1.getSelectedColumn();
+        int row = jTable1.getSelectedRow();
+        System.out.println("Column "+ column + "Row" + row);
+        if(column == 3){
+            String id =  String.valueOf(jTable1.getValueAt(row, 0));
+            dao.DelPhone(id);
+        }
+    }
+    void GetPositionContact(){
+        int column = jTable2.getSelectedColumn();
+        int row = jTable2.getSelectedRow();
+        System.out.println("Column "+ column + "Row" + row);
+        if(column == 3){
+            String id =  String.valueOf(jTable2.getValueAt(row, 0));
+            dao.DelContact(id);
+        }
+    }
+    
+    void MakeListPhone(){
+        jTable1.removeAll();
+        phones = dao.ReadPhones(this.idRef);
+        DefaultTableModel phon = (DefaultTableModel) jTable1.getModel();
+        phon.setNumRows(0);
+        for (int i = 0; i < phones.size(); i++) {
+            phon.addRow(new Object[]{
+                phones.get(i).getId(), phones.get(i).getDdd(), phones.get(i).getTelefone(), " x "
+            });
+        }
+
+        DefaultTableModel person = (DefaultTableModel) jTable2.getModel();
+        person.setNumRows(0);
+        person.addRow(new Object[]{
+            c.getId(), c.getNome(), c.getEmail(), " x "
+        });     
+    }
+    void Home(){
+        Contacts ct = new Contacts();
+        ct.setVisible(rootPaneCheckingEnabled);
+        this.dispose();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBHome;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;

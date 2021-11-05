@@ -8,7 +8,6 @@ import br.com.projectschedule.controll.Contact;
 import br.com.projectschedule.model.DAO;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JButton;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -49,6 +48,8 @@ public class Contacts extends javax.swing.JFrame {
                 formWindowOpened(evt);
             }
         });
+
+        jScrollPane2.setPreferredSize(new java.awt.Dimension(800, 600));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -98,7 +99,7 @@ public class Contacts extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(jAddContactBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -107,7 +108,7 @@ public class Contacts extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jAddContactBtn)
-                .addGap(0, 275, Short.MAX_VALUE))
+                .addGap(0, 246, Short.MAX_VALUE))
             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
 
@@ -137,7 +138,7 @@ public class Contacts extends javax.swing.JFrame {
         cp.c = contact.get(jTable1.getSelectedRow());
         System.out.println(cp.c);
         cp.setVisible(rootPaneCheckingEnabled);
-// TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jAddContactBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAddContactBtnActionPerformed
@@ -145,7 +146,6 @@ public class Contacts extends javax.swing.JFrame {
        ic.setVisible(rootPaneCheckingEnabled);
        this.dispose();    
         
-// TODO add your handling code here:
     }//GEN-LAST:event_jAddContactBtnActionPerformed
 
     /**

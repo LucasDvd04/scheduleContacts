@@ -139,7 +139,6 @@ public class DAO  {
 //            ResultSetMetaData metaData = resultSet.getMetaData();
 //            int numberOfColumns = metaData.getColumnCount();
               System.out.println("_____________________Contatos___________________\n");
-                
             while(resultSet.next()){
                 contacts.add(new Contact(resultSet.getInt("id"), resultSet.getString("name"), resultSet.getString("email")));
             }
@@ -190,5 +189,51 @@ public class DAO  {
         
         CloseBank();
         return phones;
+    }
+    
+    public void DelPhone(String i) {
+        int id = Integer.parseInt(i);
+        try {
+            ConnectBank();
+            
+            //Insert in table phone
+            ps = connection.prepareStatement("DELETE FROM phone where id = ?");
+            ps.setInt(1,id);
+            ps.execute();
+            //_________________________
+ 
+            CloseBank();
+
+          
+        } catch (SQLException sqlException){
+            sqlException.printStackTrace();
+        }
+       
+    }
+    public void DelContact(String i) {
+        int id = Integer.parseInt(i);
+        try {
+            ConnectBank();
+            
+            //Delelte in table phone
+            ps = connection.prepareStatement("DELETE FROM phone where idContato = ?");
+            ps.setInt(1,id);
+            ps.execute();
+            //_________________________
+ 
+            //Delete in table contact
+            ps = connection.prepareStatement("DELETE FROM contact where id = ?");
+            ps.setInt(1,id);
+            ps.execute();
+            //_________________________
+            
+            
+            CloseBank();
+
+          
+        } catch (SQLException sqlException){
+            sqlException.printStackTrace();
+        }
+       
     }
 }
