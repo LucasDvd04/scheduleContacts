@@ -284,7 +284,7 @@ public class InsertContato extends javax.swing.JFrame {
        
        Contacts ct = new Contacts();
        ct.setVisible(rootPaneCheckingEnabled);
-       this.dispose();
+       this.dispose(); 
         
     }//GEN-LAST:event_jButton2ActionPerformed
 

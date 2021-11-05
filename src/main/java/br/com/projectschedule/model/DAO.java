@@ -106,30 +106,46 @@ public class DAO  {
        
     }
     
-    public void UpdateContact(){
+    public void UpdateContact(String i, String name, String email) {
+        int id = Integer.parseInt(i);
         try {
-             resultSet = statement.executeQuery("SELECT * FROM contact");
-            ResultSetMetaData metaData = resultSet.getMetaData();
-            int numberOfColumns = metaData.getColumnCount();
-            System.out.println("_____________________Contatos___________________\n");
-            
-            
-            for(int i =1; i<= numberOfColumns; i++){
-                System.out.printf("%-8s",metaData.getColumnName(i));
-            }
-            System.out.println("");
-            
-            while (resultSet.next()) {
-                for(int i =1; i <= numberOfColumns; i++){
-                    System.out.printf("%-8s",resultSet.getObject(i));
-                }
-                System.out.println("");
-                
-            }
-        } catch (SQLException e) {
+            ConnectBank();
+
+            //Update in table Contact
+            ps = connection.prepareStatement("UPDATE contact SET name = ? , email = ?  where id = ?");
+            ps.setString(1, name);
+            ps.setString(2, email);
+            ps.setInt(3, id);
+            ps.execute();
+            //_________________________
+
+            CloseBank();
+
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
         }
-    } 
-    
+
+    }
+    public void UpdatePhone(String i, String ddd, String number) {
+        int id = Integer.parseInt(i);
+        try {
+            ConnectBank();
+
+            //Update in table phone
+            ps = connection.prepareStatement("UPDATE phone SET ddd = ? , number = ?  where id = ?");
+            ps.setString(1, ddd);
+            ps.setString(2, number);
+            ps.setInt(3, id);
+            ps.execute();
+            //_________________________
+
+            CloseBank();
+
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
+
+    }
     public List ReadContact(){
         List<Contact> contacts = new ArrayList<>();
         List<Phone> phones = new ArrayList<>();
@@ -164,7 +180,6 @@ public class DAO  {
         CloseBank();
         return contacts;
     }
-    
     public List ReadPhones(int id){
         List<Phone> phones = new ArrayList<>();
         ConnectBank();
@@ -190,7 +205,6 @@ public class DAO  {
         CloseBank();
         return phones;
     }
-    
     public void DelPhone(String i) {
         int id = Integer.parseInt(i);
         try {

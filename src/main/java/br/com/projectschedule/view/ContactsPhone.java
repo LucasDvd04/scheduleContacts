@@ -20,6 +20,7 @@ public class ContactsPhone extends javax.swing.JFrame {
         DAO dao = new DAO();
         List<Phone> phones = new ArrayList<>();
         public Contact c = new Contact();
+
     /**
      * Creates new form ContactsPhone
      */
@@ -55,14 +56,14 @@ public class ContactsPhone extends javax.swing.JFrame {
 
             },
             new String [] {
-                "IdPhone", "DDD", "Number", ""
+                "IdPhone", "DDD", "Number", "", ""
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, true, false, false
+                false, true, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -75,7 +76,7 @@ public class ContactsPhone extends javax.swing.JFrame {
         });
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable1MouseClicked(evt);
+                MouseClickPhone(evt);
             }
         });
         jScrollPane1.setViewportView(jTable1);
@@ -86,6 +87,9 @@ public class ContactsPhone extends javax.swing.JFrame {
             jTable1.getColumnModel().getColumn(3).setMinWidth(40);
             jTable1.getColumnModel().getColumn(3).setPreferredWidth(40);
             jTable1.getColumnModel().getColumn(3).setMaxWidth(40);
+            jTable1.getColumnModel().getColumn(4).setMinWidth(40);
+            jTable1.getColumnModel().getColumn(4).setPreferredWidth(40);
+            jTable1.getColumnModel().getColumn(4).setMaxWidth(40);
         }
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
@@ -93,14 +97,14 @@ public class ContactsPhone extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Id", "Name", "E-Mail", ""
+                "Id", "Name", "E-Mail", "", ""
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, true, true, false
+                false, true, true, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -113,7 +117,7 @@ public class ContactsPhone extends javax.swing.JFrame {
         });
         jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable2MouseClicked(evt);
+                mouseClickCont(evt);
             }
         });
         jScrollPane2.setViewportView(jTable2);
@@ -124,9 +128,13 @@ public class ContactsPhone extends javax.swing.JFrame {
             jTable2.getColumnModel().getColumn(3).setMinWidth(40);
             jTable2.getColumnModel().getColumn(3).setPreferredWidth(40);
             jTable2.getColumnModel().getColumn(3).setMaxWidth(40);
+            jTable2.getColumnModel().getColumn(4).setMinWidth(40);
+            jTable2.getColumnModel().getColumn(4).setPreferredWidth(40);
+            jTable2.getColumnModel().getColumn(4).setMaxWidth(40);
         }
 
         jBHome.setText("Home");
+        jBHome.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jBHome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBHomeActionPerformed(evt);
@@ -143,16 +151,16 @@ public class ContactsPhone extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(111, 111, 111)
                         .addComponent(jBHome)
-                        .addGap(0, 128, Short.MAX_VALUE)))
+                        .addGap(0, 239, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jBHome)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -168,15 +176,13 @@ public class ContactsPhone extends javax.swing.JFrame {
        MakeListPhone();
     }//GEN-LAST:event_formWindowOpened
 
-    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-       GetPositionPhone();      
-       MakeListPhone();
-    }//GEN-LAST:event_jTable1MouseClicked
+    private void MouseClickPhone(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MouseClickPhone
+       getIdPhone();
+    }//GEN-LAST:event_MouseClickPhone
 
-    private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
-        GetPositionContact();
-        Home();
-    }//GEN-LAST:event_jTable2MouseClicked
+    private void mouseClickCont(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mouseClickCont
+        getIdContact();
+    }//GEN-LAST:event_mouseClickCont
 
     private void jBHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBHomeActionPerformed
         Home();
@@ -217,43 +223,73 @@ public class ContactsPhone extends javax.swing.JFrame {
         });
     }
     
-    void GetPositionPhone(){
-        int column = jTable1.getSelectedColumn();
-        int row = jTable1.getSelectedRow();
-        System.out.println("Column "+ column + "Row" + row);
-        if(column == 3){
-            String id =  String.valueOf(jTable1.getValueAt(row, 0));
-            dao.DelPhone(id);
+    void getIdContact(){
+         int columnTab2 = jTable2.getSelectedColumn();
+        int rowTab2 = jTable2.getSelectedRow();
+        System.out.println("Column " + columnTab2 + "Row" + rowTab2);
+        String id = String.valueOf(jTable2.getValueAt(rowTab2, 0));
+        switch(columnTab2){
+            case 3:
+                DeleteContact(id);
+            case 4:
+                UpdateContact(rowTab2, id);
         }
+        
     }
-    void GetPositionContact(){
-        int column = jTable2.getSelectedColumn();
-        int row = jTable2.getSelectedRow();
-        System.out.println("Column "+ column + "Row" + row);
-        if(column == 3){
-            String id =  String.valueOf(jTable2.getValueAt(row, 0));
-            dao.DelContact(id);
-        }
+    void getIdPhone(){
+     int column = jTable1.getSelectedColumn();
+     int row = jTable1.getSelectedRow();
+     String id = String.valueOf(jTable1.getValueAt(row, 0));
+     switch (column){
+         case 3:
+             DeletePhone(id);
+             MakeListPhone();
+             break;
+         case 4:
+             UpdatePhone(row,id);
+             MakeListPhone();
+     }
+    }
+        void UpdatePhone(int row,String id) {
+        String ddd = String.valueOf(jTable1.getValueAt(row, 1));
+        String number = String.valueOf(jTable1.getValueAt(row, 2));
+        dao.UpdatePhone(id, ddd, number);
     }
     
-    void MakeListPhone(){
+    private void DeletePhone(String id) {
+            dao.DelPhone(id);     
+    }
+
+    void DeleteContact(String id) {
+                dao.DelContact(id);
+                Home();   
+    }
+
+    void UpdateContact(int row, String id) {
+        String nome = String.valueOf(jTable2.getValueAt(row, 1));
+        String email = String.valueOf(jTable2.getValueAt(row, 2));
+        dao.UpdateContact(id, nome, email);
+    }
+
+    void MakeListPhone() {
         jTable1.removeAll();
         phones = dao.ReadPhones(this.idRef);
         DefaultTableModel phon = (DefaultTableModel) jTable1.getModel();
         phon.setNumRows(0);
         for (int i = 0; i < phones.size(); i++) {
             phon.addRow(new Object[]{
-                phones.get(i).getId(), phones.get(i).getDdd(), phones.get(i).getTelefone(), " x "
+                phones.get(i).getId(), phones.get(i).getDdd(), phones.get(i).getTelefone(), " x ", "Save"
             });
         }
 
         DefaultTableModel person = (DefaultTableModel) jTable2.getModel();
         person.setNumRows(0);
         person.addRow(new Object[]{
-            c.getId(), c.getNome(), c.getEmail(), " x "
-        });     
+            c.getId(), c.getNome(), c.getEmail(), " x ", "Save"
+        });
     }
-    void Home(){
+
+    void Home() {
         Contacts ct = new Contacts();
         ct.setVisible(rootPaneCheckingEnabled);
         this.dispose();
