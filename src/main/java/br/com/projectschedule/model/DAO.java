@@ -6,7 +6,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -52,7 +51,6 @@ public class DAO  {
 	  } 
         
     }
-    
     private void CloseBank(){
         try {
             if (resultSet != null){
@@ -64,7 +62,6 @@ public class DAO  {
         catch (SQLException exception){
         }         
     }
-      
     public void CreateContact(Contact contact,List<Phone> phones, int counter) {
         int id = 0;
         try {
@@ -105,7 +102,6 @@ public class DAO  {
         }
        
     }
-    
     public void UpdateContact(String i, String name, String email) {
         int id = Integer.parseInt(i);
         try {
@@ -210,7 +206,7 @@ public class DAO  {
         try {
             ConnectBank();
             
-            //Insert in table phone
+            //delete in table phone
             ps = connection.prepareStatement("DELETE FROM phone where id = ?");
             ps.setInt(1,id);
             ps.execute();
@@ -224,6 +220,28 @@ public class DAO  {
         }
        
     }
+    
+     public void InsertPhone(int id,String ddd, String number) {
+        try {
+            ConnectBank();
+            
+            //Insert in table phone
+            ps = connection.prepareStatement("INSERT INTO phone(ddd,number,idContato)VALUES(?,?,?)");
+            ps.setString(1,ddd);
+            ps.setString(2, number);
+            ps.setInt(3, id);
+            ps.execute();
+            //_________________________
+ 
+            CloseBank();
+
+          
+        } catch (SQLException sqlException){
+            sqlException.printStackTrace();
+        }
+       
+    }
+    
     public void DelContact(String i) {
         int id = Integer.parseInt(i);
         try {

@@ -15,14 +15,16 @@ import java.util.List;
  * @author My&Lucas
  */
 public class InsertContato extends javax.swing.JFrame {
+
     DAO cd = new DAO();
     Contact contact = new Contact();
     List<Phone> phones = new ArrayList<>();
     int number = 1;
+
     /**
      * Creates new form InsertContato
      */
-    
+
     public InsertContato() {
         initComponents();
 
@@ -130,14 +132,14 @@ public class InsertContato extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setText("Cancelar");
+        jButton3.setText("Cancel");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Confirmar");
+        jButton2.setText("Confirm");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -192,10 +194,10 @@ public class InsertContato extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton2)
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(12, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -248,9 +250,8 @@ public class InsertContato extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -264,9 +265,9 @@ public class InsertContato extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jAddNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAddNumberActionPerformed
-       if(number < 5){
-       number+=1;
-       }
+        if (number < 5) {
+            number += 1;
+        }
         SetEnable(number);
         System.out.println(number);
     }//GEN-LAST:event_jAddNumberActionPerformed
@@ -274,18 +275,17 @@ public class InsertContato extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         contact.setNome(jName.getText());
         contact.setEmail(jEmail.getText());
-        System.out.println(contact);
-        
+
         InsertListNumber(number);
-        
+
         System.out.println(phones);
-           
-       cd.CreateContact(contact, phones, number);       
-       
-       Contacts ct = new Contacts();
-       ct.setVisible(rootPaneCheckingEnabled);
-       this.dispose(); 
-        
+
+        cd.CreateContact(contact, phones, number);
+
+        Contacts ct = new Contacts();
+        ct.setVisible(rootPaneCheckingEnabled);
+        this.dispose();
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jLDDD01PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jLDDD01PropertyChange
@@ -293,9 +293,9 @@ public class InsertContato extends javax.swing.JFrame {
     }//GEN-LAST:event_jLDDD01PropertyChange
 
     private void jSubNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSubNumberActionPerformed
-         if(number > 1){
-       number-=1;
-       }
+        if (number > 1) {
+            number -= 1;
+        }
         SetDisable(number);
         System.out.println(number);
     }//GEN-LAST:event_jSubNumberActionPerformed
@@ -305,11 +305,13 @@ public class InsertContato extends javax.swing.JFrame {
     }//GEN-LAST:event_jNamePropertyChange
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        cd.ReadContact();
-        
+        Contacts ct = new Contacts();
+        ct.setVisible(rootPaneCheckingEnabled);
+        this.dispose();
+
 // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
-    
+
     /**
      * @param args the command line arguments
      */
@@ -344,10 +346,9 @@ public class InsertContato extends javax.swing.JFrame {
             }
         });
     }
-    
-    
-    private void SetEnable(int num){
-        switch(num){
+
+    private void SetEnable(int num) {
+        switch (num) {
             case 1:
                 jLDDD01.setEnabled(rootPaneCheckingEnabled);
                 jDDD01.setEnabled(rootPaneCheckingEnabled);
@@ -372,13 +373,13 @@ public class InsertContato extends javax.swing.JFrame {
                 jLDDD05.setEnabled(rootPaneCheckingEnabled);
                 jDDD05.setEnabled(rootPaneCheckingEnabled);
                 jTel05.setEnabled(rootPaneCheckingEnabled);
-                break;  
+                break;
         }
-        
-        
+
     }
-    private void SetDisable(int num){
-        switch(num){
+
+    private void SetDisable(int num) {
+        switch (num) {
             case 4:
                 jLDDD05.setEnabled(false);
                 jDDD05.setEnabled(false);
@@ -406,38 +407,38 @@ public class InsertContato extends javax.swing.JFrame {
                 break;
         }
     }
-    
-     void InsertListNumber(int num){
-         phones.clear();
-       switch(num){
+
+    void InsertListNumber(int num) {
+        phones.clear();
+        switch (num) {
             case 1:
-                phones.add(new Phone(jDDD01.getText(),jTel01.getText()));
+                phones.add(new Phone(jDDD01.getText(), jTel01.getText()));
                 break;
             case 2:
-                phones.add(new Phone(jDDD01.getText(),jTel01.getText()));
-                phones.add(new Phone(jDDD02.getText(),jTel02.getText()));
+                phones.add(new Phone(jDDD01.getText(), jTel01.getText()));
+                phones.add(new Phone(jDDD02.getText(), jTel02.getText()));
                 break;
             case 3:
-                phones.add(new Phone(jDDD01.getText(),jTel01.getText()));
-                phones.add(new Phone(jDDD02.getText(),jTel02.getText()));
-                phones.add(new Phone(jDDD03.getText(),jTel03.getText()));
+                phones.add(new Phone(jDDD01.getText(), jTel01.getText()));
+                phones.add(new Phone(jDDD02.getText(), jTel02.getText()));
+                phones.add(new Phone(jDDD03.getText(), jTel03.getText()));
                 break;
             case 4:
-                phones.add(new Phone(jDDD01.getText(),jTel01.getText()));
-                phones.add(new Phone(jDDD02.getText(),jTel02.getText()));
-                phones.add(new Phone(jDDD03.getText(),jTel03.getText()));
-                phones.add(new Phone(jDDD04.getText(),jTel04.getText()));
+                phones.add(new Phone(jDDD01.getText(), jTel01.getText()));
+                phones.add(new Phone(jDDD02.getText(), jTel02.getText()));
+                phones.add(new Phone(jDDD03.getText(), jTel03.getText()));
+                phones.add(new Phone(jDDD04.getText(), jTel04.getText()));
                 break;
             case 5:
-                phones.add(new Phone(jDDD01.getText(),jTel01.getText()));
-                phones.add(new Phone(jDDD02.getText(),jTel02.getText()));
-                phones.add(new Phone(jDDD03.getText(),jTel03.getText()));
-                phones.add(new Phone(jDDD04.getText(),jTel04.getText()));
-                phones.add(new Phone(jDDD05.getText(),jTel05.getText()));
-                break;    
-       }
-         
-     }
+                phones.add(new Phone(jDDD01.getText(), jTel01.getText()));
+                phones.add(new Phone(jDDD02.getText(), jTel02.getText()));
+                phones.add(new Phone(jDDD03.getText(), jTel03.getText()));
+                phones.add(new Phone(jDDD04.getText(), jTel04.getText()));
+                phones.add(new Phone(jDDD05.getText(), jTel05.getText()));
+                break;
+        }
+
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jAddNumber;
     private javax.swing.JButton jButton2;
